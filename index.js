@@ -1,5 +1,6 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
+const cors = require('cors');
 
 const app = express();
 const PORT = 3000;
@@ -12,6 +13,10 @@ db.serialize(() => {
 });
 
 app.use(express.json());
+
+app.use(cors({
+    origin: 'http://localhost:8081'
+}));
 
 // Rota para adicionar uma nova tarefa
 app.post('/tarefas', (req, res) => {
